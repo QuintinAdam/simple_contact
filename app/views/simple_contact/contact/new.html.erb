@@ -1,68 +1,87 @@
-<%# Title of contact form %>
-<div class="page-header">
-  <h1>
-      <%= t(:contact_me) %>
-  </h1>
-</div>
-
-
 <div class="row">
-  <%# Reduces the total width of the form & centers %>
-  <div class="col-sm-8 col-sm-offset-2">
-      <%= form_for @message, url: simple_contact.contact_path, html: {class: "form-horizontal" } do |f| %>
+  <div class="large-10 large-centered">
+    <%# Title of contact form %>
+    <div class="page-header">
+      <h1>
+        <%= t(:contact_me) %>
+        <hr>
+      </h1>
+    </div>
+    <%= form_for @message, url: simple_contact.contact_path do |f| %>
+      <div class="form-inputs">
+        <% if @message.errors.any? %>
+          <div class='panel callout radius text-center'>
+            <h3><%= t(:message_errors_present) %></h3>
+            <ul class='no-bullet'>
+              <% @message.errors.full_messages.each do |error| %>
+                <li><%= error %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-        <div class="form-inputs">
-
-          <%# Lists any errors  in the form %>
-          <% if @message.errors.any? %>
-            <div class='well text-center'>
-              <h3><%= t(:message_errors_present) %></h3>
-              <ul class='list-unstyled'>
-                <% @message.errors.full_messages.each do |error| %>
-                  <li><%= error %></li>
-                <% end %>
-              </ul>
+        <div class="form-group <%= 'error' if @message.errors.include?(:name) %>">
+          <div class="row">
+            <div class="small-2 columns">
+              <%= f.label :name, t(:email_name_label).html_safe, for: "right-label", class: "right inline" %>
             </div>
-          <% end %>
-
-          <%# Message fields below %>
-          <div class="form-group <%= 'has-error' if @message.errors.include?(:name) %>">
-            <%= f.label :name, t(:email_name_label).html_safe, class: "col-xs-2 control-label" %>
-            <div class="col-xs-10">
-              <%= f.text_field :name, placeholder: t(:email_name_placeholder).html_safe, class: "form-control" %>
+            <div class="small-10 columns">
+              <%= f.text_field :name, placeholder: t(:email_name_placeholder).html_safe, id: "right-label" %>
+              <% if @message.errors.include?(:name)%>
+                <small class="error">Invalid entry</small>
+              <% end %>
             </div>
           </div>
-
-          <div class="form-group <%= 'has-error' if @message.errors.include?(:email) %>">
-            <%= f.label :email, t(:email_address_label).html_safe, class: "col-xs-2 control-label" %>
-            <div class="col-xs-10">
-              <%= f.email_field :email, placeholder: t(:email_address_placeholder).html_safe, class: "form-control" %>
-            </div>
-          </div>
-
-
-          <div class="form-group <%= 'has-error' if @message.errors.include?(:subject) %>">
-            <%= f.label :subject, t(:email_subject_label).html_safe, class: "col-xs-2 control-label" %>
-            <div class="col-xs-10">
-              <%= f.text_field :subject, placeholder: t(:email_subject_placeholder).html_safe, class: "form-control" %>
-            </div>
-          </div>
-
-          <div class="form-group <%= 'has-error' if @message.errors.include?(:body) %>">
-            <%= f.label :body, t(:email_body_label).html_safe, class: "col-xs-2 control-label" %>
-            <div class="col-xs-10">
-              <%= f.text_area :body, placeholder: t(:email_body_placeholder).html_safe, as: :text, rows: 10, class: "form-control" %>
-            </div>
-          </div>
-
         </div>
 
+        <div class="form-group <%= 'error' if @message.errors.include?(:email) %>">
+          <div class="row">
+            <div class="small-2 columns">
+              <%= f.label :email, t(:email_address_label).html_safe, for: "right-label", class: "right inline" %>
+            </div>
+            <div class="small-10 columns">
+              <%= f.email_field :email, placeholder: t(:email_address_placeholder).html_safe, id: "right-label" %>
+              <% if @message.errors.include?(:email)%>
+                <small class="error">Invalid entry</small>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group <%= 'error' if @message.errors.include?(:subject) %>">
+          <div class="row">
+            <div class="small-2 columns">
+              <%= f.label :subject, t(:email_subject_label).html_safe, for: "right-label", class: "right inline" %>
+            </div>
+            <div class="small-10 columns">
+              <%= f.text_field :subject, placeholder: t(:email_subject_placeholder).html_safe, id: "right-label" %>
+              <% if @message.errors.include?(:subject)%>
+                <small class="error">Invalid entry</small>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group <%= 'error' if @message.errors.include?(:body) %>">
+          <div class="row">
+            <div class="small-2 columns">
+              <%= f.label :body, t(:email_body_label).html_safe, for: "right-label", class: "right inline" %>
+            </div>
+            <div class="small-10 columns">
+              <%= f.text_area :body, placeholder: t(:email_body_placeholder).html_safe, id: "right-label" %>
+              <% if @message.errors.include?(:body)%>
+                <small class="error">Invalid entry</small>
+              <% end %>
+            </div>
+          </div>
+        </div>
         <br />
         <div class="text-center">
-          <button name='commit' class='btn btn-primary btn-lg'><%= t(:send_message).html_safe %></button>
+          <%= submit_tag t(:send_message).html_safe, :class => 'button radius'%>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>
 

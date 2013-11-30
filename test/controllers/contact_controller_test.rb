@@ -8,7 +8,7 @@ class SimpleContact::ContactControllerTest < ActionController::TestCase
     ENV['SIMPLE_CONTACT_SUBJECT_PREFIX'] = "[Simple Contact]"
   end
 
-
+ 
   test "displays the new contact us page correctly" do 
     get :new
     assert_response :success

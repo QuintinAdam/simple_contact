@@ -1,22 +1,29 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Dummy</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-THIS IS THE APP LAYOUT  
-<% flash.each do |name, msg| %>
-  <% if msg.is_a?(String) %>
-    <div class="alert alert-dismissable alert-<%= name == :notice ? "success" : "danger" %>">
-      <a class="close" data-dismiss="alert">&#215;</a>
-      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-    </div>
-  <% end %>
-<% end %>
-<%= yield %>
+<html lang="en">
+  <head>
+    <title>Dummy</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
 
-</body>
+  <body>
+    <div class="row">
+      <div class="large-10 large-centered">
+        <%= link_to 'Home', main_app.root_path %>
+        <%= link_to 'Contact Us', simple_contact.root_path %>
+        <% flash.each do |name, msg| %>
+          <% if msg.is_a?(String) %>
+            <div data-alert class="alert-box radius <%= name == :notice ? "success" : "warning" %>">
+              <%= content_tag :div, msg, :id => "flash_#{name}" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <%= yield %>
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>

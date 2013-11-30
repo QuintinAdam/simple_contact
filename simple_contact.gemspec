@@ -23,4 +23,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "factory_girl_rails", '~> 4.2.0'
   s.add_development_dependency "ffaker"
   s.add_development_dependency "coveralls"
+  s.add_development_dependency "letter_opener"
+  s.add_development_dependency "foundation-rails"
+  s.add_development_dependency "sass-rails"
 end

@@ -11,5 +11,5 @@ en:
   message_errors_present:                 "Please correct the following errors:"
   mailer_success_message:                 "Thanks for contacting us. We'll be in touch soon!"
   mailer_error_message:                   "Please correct the issues below"
-  send_message:                           "<i class='glyphicon glyphicon-envelope'></i> Send Message"
+  send_message:                           "Send Message"
   invalid_email_message:                  "must be a valid email address"
